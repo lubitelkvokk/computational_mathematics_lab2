@@ -1,0 +1,73 @@
+/*.k_for_x {*/
+/*    width: 40px;*/
+/*}*/
+
+/*.k_for_constant {*/
+/*    width: 40px;*/
+/*}*/
+
+/*.polynom_input_form {*/
+/*    display: flex;*/
+/*}*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1{
+    text-align: center;
+}
+
+.polynom_input_form {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.polynom_input_form div {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.polynom_input_form input[type="number"] {
+    width: 50px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.polynom_input_form input[type="number"]:focus {
+    outline: none;
+    border-color: #4caf50;
+}
+
+.polynom_input_form input[type="number"]:hover {
+    border-color: #888;
+}
+
+.board_block,.accuracy_block {
+    margin-top: 10px;
+}
+
+.plot_block {
+    justify-content: center;
+    text-align: center;
+}
+
+.programm_result{
+    /*width: 600px;*/
+    margin-top: 20px;
+    height: 500px;
+    text-align: center;
+}
+
+#console{
+    width: 600px;
+    height: 200px;
+}

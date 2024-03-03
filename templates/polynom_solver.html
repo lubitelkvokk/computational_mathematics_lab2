@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polynomial Solver</title>
+    <link href="{{ url_for('static', path='/polynom_solver.css') }}" rel="stylesheet">
+</head>
+<body>
+
+<h1>Enter your polynomial</h1>
+<form class="polynom_input_form" action="/plot" method="post">
+    <div>
+        <input type="number" class="k_for_x" name="k_for_x_3" value="0"> x^3 +
+    </div>
+    <div>
+        <input type="number" class="k_for_x" name="k_for_x_2" value="0"> x^2 +
+    </div>
+    <div>
+        <input type="number" class="k_for_x" name="k_for_x_1" value="0"> x +
+    </div>
+    <div>
+        <input type="number" class="k_for_constant" name="k_for_constant" value="0">
+    </div>
+    <div class="board_block">
+        <label>Границы интервала:</label>
+        <input type="number" class="k_for_constant" name="left_board" value="-10">
+        <input type="number" class="k_for_constant" name="right_board" value="10">
+    </div>
+    <div class="accuracy_block">
+        <label>Accuracy:</label>
+        <input type="number" class="k_for_constant" name="accuracy" value="0.01">
+    </div>
+    <button type="submit">Plot</button>
+</form>
+
+
+<div class="plot_block">
+    {% if plot_data %}
+    <h2>Plot:</h2>
+    <br>
+    <img src="{{plot_data}}" alt="Plot">
+    {% endif %}
+</div>
+
+<div class="programm_result">
+    {% if result %}
+    <textarea id="console">
+        {{result}}
+    </textarea>
+    {% endif %}
+</div>
+
+
+</body>
+</html>
