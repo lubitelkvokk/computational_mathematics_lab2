@@ -11,21 +11,35 @@
 <h1>Enter your polynomial</h1>
 <form class="polynom_input_form" action="/plot" method="post">
     <div>
-        <input type="number" class="k_for_x" name="k_for_x_3" value="0"> x^3 +
+        <input type="number" class="k_for_x" name="k_for_x_3"
+               value="{% if k_for_x_3 is not none %}{{ k_for_x_3 }}{% else %}0{% endif %}"> x^3 +
     </div>
     <div>
-        <input type="number" class="k_for_x" name="k_for_x_2" value="0"> x^2 +
+        <input type="number" class="k_for_x" name="k_for_x_2"
+               value="{% if k_for_x_2 is not none %}{{ k_for_x_2 }}{% else %}0{% endif %}"> x^2 +
     </div>
     <div>
-        <input type="number" class="k_for_x" name="k_for_x_1" value="0"> x +
+        <input type="number" class="k_for_x" name="k_for_x_1"
+               value="{% if k_for_x_1 is not none %}{{ k_for_x_1 }}{% else %}0{% endif %}"> x +
     </div>
     <div>
-        <input type="number" class="k_for_constant" name="k_for_constant" value="0">
+        <input type="number" class="k_for_constant" name="k_for_constant"
+               value="{% if k_for_constant is not none %}{{ k_for_constant }}{% else %}0{% endif %}">
     </div>
     <div class="board_block">
         <label>Границы интервала:</label>
-        <input type="number" class="k_for_constant" name="left_board" value="-10">
-        <input type="number" class="k_for_constant" name="right_board" value="10">
+        <input type="number" class="k_for_constant" name="left_board" value="{% if left_board is not none %}{{ left_board }}{% else %}-10{% endif %}">
+        <input type="number" class="k_for_constant" name="right_board" value="{% if right_board is not none %}{{ right_board }}{% else %}10{% endif %}">
+    </div>
+    <div class="method_block">
+        <label>Метод:</label>
+
+        <select name="method" id="pet-select">
+            <option value="chord">Chord method</option>
+            <option value="newton">Newton method</option>
+            <option value="simple_iteration">Simple iteration method</option>
+        </select>
+
     </div>
     <div class="accuracy_block">
         <label>Accuracy:</label>

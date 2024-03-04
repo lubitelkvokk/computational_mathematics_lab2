@@ -11,27 +11,57 @@ templates = Jinja2Templates(directory="templates")
 
 @router.get("/plot")
 async def polynomial_solver(request: Request):
-    return templates.TemplateResponse("polynom_solver.html", {"request": request})
+    default_values = {
+        "request": request,
+        'k_for_x_3': 0,
+        'k_for_x_2': 0,
+        'k_for_x_1': 0,
+        'k_for_constant': 0,
+        'left_board': -10,
+        'right_board': 10,
+        'accuracy': 0.01
+    }
+    return templates.TemplateResponse("polynom_solver.html", default_values)
 
 
 @router.post("/plot")
 async def plot_graph(request: Request, k_for_x_3: float = Form(...), k_for_x_2: float = Form(...),
                      k_for_x_1: float = Form(...), k_for_constant: float = Form(...),
                      left_board: float = Form(...), right_board: float = Form(...),
-                     accuracy: float = Form(...)):
+                     accuracy: float = Form(...), method: str = Form(...)):
     generate_plot(k_for_x_3, k_for_x_2, k_for_x_1, k_for_constant, left_board, right_board, accuracy)
 
     # Возврат изображения графика как HTTP-ответ
     # result = solve_with_chords(left_board, right_board,
     #                            [k_for_constant, k_for_x_1, k_for_x_2, k_for_x_3],
     #                            accuracy)
-
+    print(method)
     try:
-        result = solve_with_simple_iteration(left_board, right_board,
-                                   [k_for_constant, k_for_x_1, k_for_x_2, k_for_x_3],
-                                   accuracy)
+        if method == "chord":
+            result = solve_with_chords(left_board, right_board,
+                                       [k_for_constant, k_for_x_1, k_for_x_2, k_for_x_3],
+                                       accuracy)
+        elif method == "newton":
+            result = solve_with_newton(left_board, right_board,
+                                       [k_for_constant, k_for_x_1, k_for_x_2, k_for_x_3],
+                                       accuracy)
+        else:
+            result = solve_with_simple_iteration(left_board, right_board,
+                                                 [k_for_constant, k_for_x_1, k_for_x_2, k_for_x_3],
+                                                 accuracy)
     except Exception as e:
         result = e
-    print(result)
+
     return templates.TemplateResponse("polynom_solver.html",
-                                      {"request": request, "plot_data": "static/images/image.png", "result": result})
+                                      {
+                                          "request": request,
+                                          "plot_data": "static/images/image.png",
+                                          "result": result,
+                                          'k_for_x_3': 0,
+                                          'k_for_x_2': 0,
+                                          'k_for_x_1': 0,
+                                          'k_for_constant': 0,
+                                          'left_board': -10,
+                                          'right_board': 10,
+                                          'accuracy': 0.01
+                                      })
