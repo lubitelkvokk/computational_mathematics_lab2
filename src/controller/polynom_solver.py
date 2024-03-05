@@ -57,11 +57,11 @@ async def plot_graph(request: Request, k_for_x_3: float = Form(...), k_for_x_2: 
                                           "request": request,
                                           "plot_data": "static/images/image.png",
                                           "result": result,
-                                          'k_for_x_3': 0,
-                                          'k_for_x_2': 0,
-                                          'k_for_x_1': 0,
-                                          'k_for_constant': 0,
-                                          'left_board': -10,
-                                          'right_board': 10,
-                                          'accuracy': 0.01
+                                          'k_for_x_3': k_for_x_3,
+                                          'k_for_x_2': k_for_x_2,
+                                          'k_for_x_1': k_for_x_1,
+                                          'k_for_constant': k_for_constant,
+                                          'left_board': left_board,
+                                          'right_board': right_board,
+                                          'accuracy': accuracy
                                       })

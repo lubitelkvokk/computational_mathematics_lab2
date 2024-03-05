@@ -11,25 +11,27 @@
 <h1>Enter your polynomial</h1>
 <form class="polynom_input_form" action="/plot" method="post">
     <div>
-        <input type="number" class="k_for_x" name="k_for_x_3"
+        <input type="number" class="k_for_x" name="k_for_x_3" step="any"
                value="{% if k_for_x_3 is not none %}{{ k_for_x_3 }}{% else %}0{% endif %}"> x^3 +
     </div>
     <div>
-        <input type="number" class="k_for_x" name="k_for_x_2"
+        <input type="number" class="k_for_x" name="k_for_x_2" step="any"
                value="{% if k_for_x_2 is not none %}{{ k_for_x_2 }}{% else %}0{% endif %}"> x^2 +
     </div>
     <div>
-        <input type="number" class="k_for_x" name="k_for_x_1"
+        <input type="number" class="k_for_x" name="k_for_x_1" step="any"
                value="{% if k_for_x_1 is not none %}{{ k_for_x_1 }}{% else %}0{% endif %}"> x +
     </div>
     <div>
-        <input type="number" class="k_for_constant" name="k_for_constant"
+        <input type="number" class="k_for_constant" name="k_for_constant" step="any"
                value="{% if k_for_constant is not none %}{{ k_for_constant }}{% else %}0{% endif %}">
     </div>
     <div class="board_block">
         <label>Границы интервала:</label>
-        <input type="number" class="k_for_constant" name="left_board" value="{% if left_board is not none %}{{ left_board }}{% else %}-10{% endif %}">
-        <input type="number" class="k_for_constant" name="right_board" value="{% if right_board is not none %}{{ right_board }}{% else %}10{% endif %}">
+        <input type="number" class="k_for_constant" name="left_board" step="any"
+               value="{% if left_board is not none %}{{ left_board }}{% else %}-10{% endif %}">
+        <input type="number" class="k_for_constant" name="right_board" step="any"
+               value="{% if right_board is not none %}{{ right_board }}{% else %}10{% endif %}">
     </div>
     <div class="method_block">
         <label>Метод:</label>
