@@ -13,8 +13,8 @@ def get_roots_number(a: float, b: float, step: float, func):
     return len(get_roots_intervals(a, b, step, func))
 
 
-def solve_with_chords(a: float, b: float, koeffs, accuracy: float):
-    func = lambda x: sum(koeff * x ** i for i, koeff in enumerate(koeffs))
+def solve_with_chords(a: float, b: float, func, accuracy: float):
+    # func = lambda x: sum(koeff * x ** i for i, koeff in enumerate(koeffs))
     intervals = get_roots_intervals(a, b, 0.1, func)
     result = ""
     if len(intervals) == 0:
@@ -30,8 +30,8 @@ def solve_with_chords(a: float, b: float, koeffs, accuracy: float):
         return result
 
 
-def solve_with_newton(a: float, b: float, koeffs, accuracy: float):
-    func = lambda x: sum(koeff * x ** i for i, koeff in enumerate(koeffs))
+def solve_with_newton(a: float, b: float, func, accuracy: float):
+    # func = lambda x: sum(koeff * x ** i for i, koeff in enumerate(koeffs))
     intervals = get_roots_intervals(a, b, 0.1, func)
     result = ""
     if len(intervals) == 0:
@@ -42,7 +42,7 @@ def solve_with_newton(a: float, b: float, koeffs, accuracy: float):
         result += f"Found roots:\n"
         for i in intervals:
             root_number += 1
-            x_i, iteration_count = find_solution_with_newton_method(i[0], i[1], koeffs, accuracy)
+            x_i, iteration_count = find_solution_with_newton_method(i[0], i[1], func, accuracy)
             result += f"{root_number} root: f({x_i}) = {func(x_i)}, iteration count: {iteration_count}\n"
         return result
 

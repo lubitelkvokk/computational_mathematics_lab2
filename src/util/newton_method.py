@@ -1,5 +1,8 @@
-def calculate_x(x_i, func, first_derivatative_func):
-    return x_i - func(x_i) / first_derivatative_func(x_i)
+from sympy import sin, symbols, diff
+
+
+def calculate_x(x, x_i, func, first_derivatative_func):
+    return x_i - func(x_i) / first_derivatative_func.subs(x, x_i)
 
 
 def derivative_of_polynom(koeffs):
@@ -9,27 +12,25 @@ def derivative_of_polynom(koeffs):
     return new_koeffs
 
 
-def find_solution(a: float, b: float, koeffs, accuracy: float):
+def find_solution(a: float, b: float, func, accuracy: float):
+    x = symbols('x')
+    sympy_func = func(x)
 
-    first_derivatative_new_koeffs = derivative_of_polynom(koeffs)
-    second_derivatative_new_koeffs = derivative_of_polynom(first_derivatative_new_koeffs)
+    first_derivatative_func = diff(sympy_func, x)
+    second_derivative_func = diff(sympy_func, x, 2)
 
-    func = lambda x: sum(koeff * x ** i for i, koeff in enumerate(koeffs))
-    first_derivatative_func = lambda x: sum(koeff * x ** i for i, koeff in enumerate(first_derivatative_new_koeffs))
-    second_derivative_func = lambda x: sum(koeff * x ** i for i, koeff in enumerate(second_derivatative_new_koeffs))
-    if func(a) * second_derivative_func(a) > 0:
+    if func(a) * second_derivative_func.subs(x, a) > 0:
         x_i = a
     else:
         x_i = b
 
-    x_i = calculate_x(x_i, func, first_derivatative_func)
+    x_i = calculate_x(x, x_i, func, first_derivatative_func)
 
     iteration_count = 1
     while abs(func(x_i)) > accuracy:
         iteration_count += 1
-        x_i = calculate_x(x_i, func, first_derivatative_func)
+        x_i = x_i = calculate_x(x, x_i, func, first_derivatative_func)
 
     return x_i, iteration_count
-
 
 # print(find_solution(-2, -1, function, 0.01))

@@ -3,9 +3,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-def generate_plot(k_for_x_3, k_for_x_2, k_for_x_1, k_for_constant, left_board, right_board, accuracy):
+def generate_plot(koeffs, left_board, right_board, accuracy):
     x = np.linspace(left_board, right_board, 1000)
-    y = k_for_x_3 * x ** 3 + k_for_x_2 * x ** 2 + k_for_x_1 * x + k_for_constant
+    y = sum(koeff * x ** i for i, koeff in enumerate(koeffs))
     # Создание графика
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(x, y)
