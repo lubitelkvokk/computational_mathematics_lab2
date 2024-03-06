@@ -23,16 +23,21 @@ def find_solution(a: float, b: float, func, accuracy: float):
         x_i = a
     else:
         x_i = b
+    # первая вторая производная, сходимость метода
+    x_0 = x_i
 
     x_i = calculate_x(x, x_i, func, first_derivatative_func)
 
     iteration_count = 1
     while abs(func(x_i)) > accuracy:
         iteration_count += 1
-        x_i = x_i = calculate_x(x, x_i, func, first_derivatative_func)
-        if (iteration_count > 100):
-            raise Exception("too many iterations")
+        x_i = calculate_x(x, x_i, func, first_derivatative_func)
+        if iteration_count > 1000:
+            raise Exception(f"Расходящийся процесс, f'(a)={first_derivatative_func.subs(x, a)}," +
+                            f"f''(a)={second_derivative_func.subs(x, a)}," +
+                            f"f'(b)={first_derivatative_func.subs(x, b)}," +
+                            f"f'(b)={second_derivative_func.subs(x, b)}")
 
-    return x_i, iteration_count
+    return x_i, iteration_count, x_0, f"f'({a})={first_derivatative_func.subs(x, a)}," + f"f''({a})={second_derivative_func.subs(x, a)}," + f"f'({b})={first_derivatative_func.subs(x, b)}," + f"f'({b})={second_derivative_func.subs(x, b)}"
 
-# print(find_solution(-2, -1, function, 0.01))
+    # print(find_solution(-2, -1, function, 0.01))
