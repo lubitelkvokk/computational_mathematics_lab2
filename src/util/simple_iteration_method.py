@@ -42,5 +42,7 @@ def find_solution(a: float, b: float, koeffs, accuracy: float):
         diff = x_i - new_x
         x_i = new_x
         print(f"x_{iteration_count}", x_i)
+        if (iteration_count > 100):
+            raise Exception("too many iterations")
 
     return x_i, iteration_count

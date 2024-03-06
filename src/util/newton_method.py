@@ -30,6 +30,8 @@ def find_solution(a: float, b: float, func, accuracy: float):
     while abs(func(x_i)) > accuracy:
         iteration_count += 1
         x_i = x_i = calculate_x(x, x_i, func, first_derivatative_func)
+        if (iteration_count > 100):
+            raise Exception("too many iterations")
 
     return x_i, iteration_count
 

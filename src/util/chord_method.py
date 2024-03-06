@@ -15,6 +15,8 @@ def find_solution(a: float, b: float, func, accuracy: float):
         else:
             a_i = x_i
         x_i = calculate_x(a_i, b_i, func)
+        if (iteration_count > 100):
+            raise Exception("too many iterations")
 
     return x_i, iteration_count
 
