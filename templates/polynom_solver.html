@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polynomial Solver</title>
     <link href="{{ url_for('static', path='/polynom_solver.css') }}" rel="stylesheet">
+
 </head>
 <body>
 
@@ -27,21 +28,19 @@
                value="{% if k_for_constant is not none %}{{ k_for_constant }}{% else %}0{% endif %}">
     </div>
     <div class="board_block">
-        <label>Границы интервала:</label>
-        <input type="number" class="k_for_constant" name="left_board" step="any"
+        <label>Interval boundaries:</label>
+        <input type="number" class="intervals" name="left_board" step="any"
                value="{% if left_board is not none %}{{ left_board }}{% else %}-10{% endif %}">
-        <input type="number" class="k_for_constant" name="right_board" step="any"
+        <input type="number" class="intervals" name="right_board" step="any"
                value="{% if right_board is not none %}{{ right_board }}{% else %}10{% endif %}">
     </div>
     <div class="method_block">
-        <label>Метод:</label>
-
-        <select name="method" id="pet-select">
+        <label>Method:</label>
+        <select name="method">
             <option value="chord">Chord method</option>
             <option value="newton">Newton method</option>
             <option value="simple_iteration">Simple iteration method</option>
         </select>
-
     </div>
     <div class="accuracy_block">
         <label>Accuracy:</label>
@@ -50,6 +49,34 @@
     <button type="submit">Plot</button>
 </form>
 
+<h1>Enter your arbitrary function</h1>
+<form class="arbitrary_function_input_form" action="/arbitrary_function" method="post">
+    <div>
+        <label for="arbitrary_function">Enter your arbitrary function:</label>
+        <input type="text" id="arbitrary_function" name="arbitrary_function"
+               value="{% if arbitrary_function is not none %}{{ arbitrary_function }}{% else %}0{% endif %}">
+    </div>
+    <div class="board_block">
+        <label>Interval boundaries:</label>
+        <input type="number" class="intervals" name="left_board" step="any"
+               value="{% if left_board is not none %}{{ left_board }}{% else %}-10{% endif %}">
+        <input type="number" class="intervals" name="right_board" step="any"
+               value="{% if right_board is not none %}{{ right_board }}{% else %}10{% endif %}">
+    </div>
+    <div class="method_block">
+        <label>Method:</label>
+        <select name="method">
+            <option value="chord">Chord method</option>
+            <option value="newton">Newton method</option>
+<!--            <option value="simple_iteration">Simple iteration method</option>-->
+        </select>
+    </div>
+    <div class="accuracy_block">
+        <label>Accuracy:</label>
+        <input type="number" class="k_for_constant" name="accuracy" value="0.01">
+    </div>
+    <button type="submit">Plot</button>
+</form>
 
 <div class="plot_block">
     {% if plot_data %}

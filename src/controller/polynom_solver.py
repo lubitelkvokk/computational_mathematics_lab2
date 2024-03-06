@@ -20,7 +20,8 @@ async def polynomial_solver(request: Request):
         'k_for_constant': 0,
         'left_board': -10,
         'right_board': 10,
-        'accuracy': 0.01
+        'accuracy': 0.01,
+        'arbitrary_function': "sin(x)"
     }
     return templates.TemplateResponse("polynom_solver.html", default_values)
 
@@ -30,10 +31,9 @@ async def plot_graph(request: Request, k_for_x_3: float = Form(...), k_for_x_2: 
                      k_for_x_1: float = Form(...), k_for_constant: float = Form(...),
                      left_board: float = Form(...), right_board: float = Form(...),
                      accuracy: float = Form(...), method: str = Form(...)):
-
     func = create_lambda_function(f"{k_for_x_3}*x**3+{k_for_x_2}*x**2+{k_for_x_1}*x+{k_for_constant}")
 
-    generate_plot([k_for_constant, k_for_x_1, k_for_x_2, k_for_x_3], left_board, right_board, accuracy)
+    generate_plot(func, left_board, right_board, accuracy)
 
     print(method)
     try:
@@ -62,6 +62,40 @@ async def plot_graph(request: Request, k_for_x_3: float = Form(...), k_for_x_2: 
                                           'k_for_x_2': k_for_x_2,
                                           'k_for_x_1': k_for_x_1,
                                           'k_for_constant': k_for_constant,
+                                          'left_board': left_board,
+                                          'right_board': right_board,
+                                          'accuracy': accuracy
+                                      })
+
+
+@router.post("/arbitrary_function")
+async def plot_graph_by_arbitrary_function(request: Request, arbitrary_function: str = Form(...),
+                                           left_board: float = Form(...), right_board: float = Form(...),
+                                           accuracy: float = Form(...), method: str = Form(...)):
+    func = create_lambda_function(arbitrary_function)
+
+    generate_plot(func, left_board, right_board, accuracy)
+
+    print(method)
+    try:
+        if method == "chord":
+            result = solve_with_chords(left_board, right_board,
+                                       func,
+                                       accuracy)
+        elif method == "newton":
+            result = solve_with_newton(left_board, right_board,
+                                       func,
+                                       accuracy)
+
+    except Exception as e:
+        result = e
+
+    return templates.TemplateResponse("polynom_solver.html",
+                                      {
+                                          "request": request,
+                                          "plot_data": "static/images/image.png",
+                                          "result": result,
+                                          'arbitrary_function': arbitrary_function,
                                           'left_board': left_board,
                                           'right_board': right_board,
                                           'accuracy': accuracy
