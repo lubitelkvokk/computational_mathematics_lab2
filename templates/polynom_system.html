@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polynomial System Solver</title>
+    <link href="{{ url_for('static', path='/polynom_solver.css') }}" rel="stylesheet">
+</head>
+<body>
+
+<h1>Choose a System of Equations</h1>
+
+<div class="system-selection">
+    <form action="/solve_system" method="post">
+        <h2>System 1</h2>
+        <p>System of equations:</p>
+        <p>1. ( sin(x+0.5) - y = 1 )</p>
+        <p>2. ( cos(y-2) + x = 0</p>
+        <input type="hidden" name="system_choice" value="system1">
+        <input name="x0" value="0">
+        <input name="y0" value="0">
+        <input name="accuracy" value="0.01">
+        <button type="submit">Select System 1</button>
+    </form>
+    <iframe src="https://www.desmos.com/calculator/ysbc02jpty?embed" width="500" height="500"
+            style="border: 1px solid #ccc" frameborder=0></iframe>
+    <form action="/solve_system" method="post">
+        <h2>System 2</h2>
+        <p>System of equations:</p>
+        <p>1. ( sin(x+1) - y = 1.2 )</p>
+        <p>2. ( 2x + cos(y) = 2 )</p>
+        <input type="hidden" name="system_choice" value="system2">
+        <input name="x0" value="0">
+        <input name="y0" value="0">
+        <input name="accuracy" value="0.01">
+        <button type="submit">Select System 2</button>
+    </form>
+    <iframe src="https://www.desmos.com/calculator/xrqgryizgz?embed" width="500" height="500"
+            style="border: 1px solid #ccc" frameborder=0></iframe>
+</div>
+
+<!--<div class="plot_block">-->
+<!--    {% if plot_data %}-->
+<!--    <h2>Solution:</h2>-->
+<!--    <br>-->
+<!--    <img src="{{plot_data}}" alt="Plot">-->
+
+<!--    {% endif %}-->
+<!--</div>-->
+
+<div class="programm_result">
+    {% if result %}
+    <textarea id="console">
+        {{result}}
+    </textarea>
+    {% endif %}
+</div>
+
+</body>
+</html>

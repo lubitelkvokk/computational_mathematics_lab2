@@ -132,7 +132,7 @@ async def plot_graph_by_arbitrary_function(request: Request, arbitrary_function:
 #     return templates.TemplateResponse("polynom_solver.html",
 #                                       {
 #                                           "request": request,
-#                                           "plot_data": "static/images/image.png",
+#                                           "plot_data": "static/images/system2.png",
 #                                           "result": result,
 #                                           'arbitrary_function': arbitrary_function,
 #                                           'left_board': left_board,

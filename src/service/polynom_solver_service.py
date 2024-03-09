@@ -65,5 +65,5 @@ def solve_with_simple_iteration(a: float, b: float, koeffs, accuracy: float):
             x_i, iteration_count, phi_values = find_solution_with_simple_iteration_method(i[0], i[1], koeffs, accuracy)
             result += f"{root_number} root: f({x_i}) = {func(x_i)}, iteration count: {iteration_count}," \
                       f" iteration count: {iteration_count}, start interval: {i}," \
-                      f"{phi_values}\n"
+                      f"phi'(a)={phi_values[0]}, phi'(b)={phi_values[1]}\n"
         return result

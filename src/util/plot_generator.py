@@ -15,6 +15,6 @@ def generate_plot(func, left_board, right_board, accuracy):
     ax.axvline(0, color='black', linewidth=0.5)  # Вертикальная линия оси X
 
     ax.grid(True)
-    plt.savefig("static/images/image.png")
+    plt.savefig("static/images/system2.png")
     # Очистка графика из памяти, чтобы освободить ресурсы
     plt.close(fig)
