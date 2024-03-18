@@ -15,7 +15,7 @@ def get_roots_number(a: float, b: float, step: float, func):
 
 def solve_with_chords(a: float, b: float, func, accuracy: float):
     # func = lambda x: sum(koeff * x ** i for i, koeff in enumerate(koeffs))
-    intervals = get_roots_intervals(a, b, 1, func)
+    intervals = get_roots_intervals(a, b, 0.1, func)
     result = ""
     if len(intervals) == 0:
         result += "There are no roots on this interval"
@@ -51,7 +51,7 @@ def solve_with_newton(a: float, b: float, func, accuracy: float):
 
 def solve_with_simple_iteration(a: float, b: float, koeffs, accuracy: float):
     func = lambda x: sum(koeff * x ** i for i, koeff in enumerate(koeffs))
-    intervals = get_roots_intervals(a, b, 1, func)
+    intervals = get_roots_intervals(a, b, 5.99999, func)
     result = ""
 
     if len(intervals) == 0:

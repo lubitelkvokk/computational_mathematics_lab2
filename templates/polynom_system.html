@@ -14,10 +14,12 @@
     <form action="/solve_system" method="post">
         <h2>System 1</h2>
         <p>System of equations:</p>
-        <p>1. ( sin(x+0.5) - y = 1 )</p>
-        <p>2. ( cos(y-2) + x = 0</p>
+        <p>1. sin(x+0.5) - y = 1 </p>
+        <p>2. cos(y-2) + x = 0</p>
         <input type="hidden" name="system_choice" value="system1">
+        <label>x0:</label>
         <input name="x0" value="0">
+        <label>y0:</label>
         <input name="y0" value="0">
         <input name="accuracy" value="0.01">
         <button type="submit">Select System 1</button>
@@ -27,10 +29,12 @@
     <form action="/solve_system" method="post">
         <h2>System 2</h2>
         <p>System of equations:</p>
-        <p>1. ( sin(x+1) - y = 1.2 )</p>
-        <p>2. ( 2x + cos(y) = 2 )</p>
+        <p>1. sin(x+1) - y = 1.2 </p>
+        <p>2. 2x + cos(y) = 2 </p>
         <input type="hidden" name="system_choice" value="system2">
+        <label>x0:</label>
         <input name="x0" value="0">
+        <label>y0:</label>
         <input name="y0" value="0">
         <input name="accuracy" value="0.01">
         <button type="submit">Select System 2</button>
